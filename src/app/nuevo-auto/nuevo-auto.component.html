@@ -1,0 +1,32 @@
+<form #formulario="ngForm" (ngSubmit)="enviarFormulario(formulario)">
+    <div class="mb-3">
+      <label for="inputNombre" class="form-label">Nombre:</label>
+      <input type="text" class="form-control" id="inputNombre"
+        name="nombre" [(ngModel)]="auto.nombre" required
+        #controlNombre="ngModel">
+      <div *ngIf="controlNombre.getError('required')
+            && controlNombre.dirty" 
+        style="color: red;">
+        El nombre es requerido
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="inputModelo" class="form-label">Modelo:</label>
+      <input type="text" class="form-control" id="inputModelo"
+        name="modelo" [(ngModel)]="auto.modelo">
+    </div>
+    <button type="submit" class="btn btn-primary">Enviar</button>
+  </form>
+
+  <div *ngIf="formulario.invalid && formulario.touched" 
+    style="color: red;">
+    El formulario es invalido
+  </div>
+
+  <p>Nombre: {{ nombre }}  </p>
+  <p>Modelo: {{ modelo }}</p>
+
+  <p>Objeto Auto: {{ auto | json }}</p>
+  <p>Formulario: {{ formulario.value | json }}</p>
+  <p>ES VALIDO EL FORMULARIO: {{ formulario.valid }}</p>
+  
